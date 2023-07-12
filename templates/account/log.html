@@ -1,0 +1,298 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogIn</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/log.css' %}">
+  <script src="https://use.fontawesome.com/7de0eb545c.js"></script>
+
+  <style>
+
+    a {
+      color: #3f444c;
+      text-decoration: none;
+    }
+
+    a:hover{
+      text-decoration: none;
+      color: cadetblue;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 20px 0 0 120px; /* Increase the left padding as needed */
+      background-color: white; /* Set the background color to white */
+    }
+
+    .navbar .logo {
+      margin-right: 20px; /* Increase the margin as needed */
+    }
+
+    .navbar .logo img {
+      height: 60px; /* Increase the height as needed */
+    }
+
+    .navbar .nav-title {
+      font-size: 24px; /* Adjust the font size as needed */
+    }
+
+    .btn-orange {
+      background: linear-gradient(180deg, #ff6c37 0, #ef5b25 100%);
+      color: #fff;
+      border-radius: 3px;
+      margin-top: 10px;
+    }
+
+    .btn-orange:hover {
+      opacity: 0.8;
+      color: #fff;
+    }
+
+    .social-login {
+      margin-top: 20px;
+    }
+
+    .social-login {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .social-login p {
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+
+    .social-login .facebook-btn,
+    .social-login .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #3b5998; /* Facebook blue */
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-right: 10px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .social-login .facebook-btn i,
+    .social-login .google-btn i {
+      
+    }
+
+    .social-login .google-btn {
+      background-color: #db4437; /* Google red */
+    }
+
+    .signin-btn {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .signin-form {
+      padding-top: 15px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .signin-section .signin-info {
+      margin-top: 20px; /* Remove top margin */
+      margin-bottom: 25px; /* Remove bottom margin */
+    }
+
+    .signin-section .signin-info .signin {
+      margin-top: 0; /* Remove margin */
+    }
+
+    .text-below-input {
+      padding: 0;
+    }
+
+    p.small-text {
+      padding-top: 10px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="logo">
+      <img src="{% static 'img/home.png' %}" alt="">
+    </div>
+  </div>
+
+  <div class="container-fluid login-section">
+    <div class="row">
+      <div class="col-sm-6">
+        <img width="100%" src="{% static 'img/logo.jpeg' %}" alt="">
+      </div>
+      <div class="col-sm-6 signin-section">
+        <div class="signin-info">
+          <h4 class="center-heading">Sign In</h4>
+          <div class="needs-validation signin-form" novalidate>
+            <div class="form-group">
+              <input type="text" class="form-control" id="uname" placeholder="Enter your email" name="username"
+                required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="pwd" placeholder="Password" name="password" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+              <div class="text-below-input">
+                <a style="display: none;" id="resend-verification-link" href="#" data-toggle="modal"
+                  data-target="#verificationModal">
+                  <p>Did not receive verification link?</p>
+                </a>
+                <a id="forgot-password" href="#" data-toggle="modal" data-target="#myModal">
+                  <p>Forgot Password</p>
+                </a>
+              </div>
+            </div>
+            <div class="signin">
+              <button id="sign-in" class="btn btn-primary signin-btn">Sign In</button>
+              <div class="response-text"></div>
+            </div>
+            {% csrf_token %}
+            </div>
+            <div class="social-login d-flex justify-content-center">
+            <a href="/accounts/facebook/login/?process=login" class="facebook-btn"><i class="fa fa-facebook"></i>Facebook</a>
+            <a href="/accounts/google/login/?process=login" class="google-btn"><i class="fa fa-google"></i>Google</a>
+            </div>
+            <div class="signin">
+        <p class="small-text">Don't have an account yet? <a href="/accounts/signup"><button class="btn btn-sm grey-btn"
+              style="font-size: 0.7rem;">Sign Up</button></a></p>
+      </div>
+      <div>
+        <p class="incorrect-details"></p>
+
+        {% if status %}
+        <p style="color: green; font-size: 14px;">{{message}}</p>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+  </div>
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      <!-- Modal Header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Forgot Password</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <label for="username">Please enter your email/username</label>
+      <input type="text" class="form-control" id="email-fp" placeholder="Email" name="username" required>
+      <p class="enter-valid-username">Please enter a valid email</p>
+      <p class="success-email-sent"></p>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <p class="loader-forgot-password"></p>
+      <button type="button" id="forgot-password-link-btn" class="btn btn-secondary small-orange-btn"
+        data-dismiss="">Submit</button>
+    </div>
+
+  </div>
+</div>
+  </div>
+  <!-- Verification Modal -->
+  <div class="modal fade" id="verificationModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      <!-- Modal Header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Resend Verification Link</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <label for="username">Please enter your email</label>
+      <input type="text" class="form-control" id="email-fp-resend" placeholder="Email" name="username" required>
+      <p class="enter-valid-username">Please enter a valid email</p>
+      <p class="success-email-sent"></p>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <p class="loader-forgot-password"></p>
+      <button type="button" id="send-verification-link-btn" class="btn btn-secondary small-orange-btn"
+        data-dismiss="">Send Verification Link</button>
+    </div>
+
+  </div>
+</div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare
+.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+crossorigin="anonymous"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="/static/js/host-new.js"></script>
+  <script src="/static/js/login.js"></script>
+  <script>
+    // Disable form submissions if there are invalid fields
+    (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        // Get the forms we want to add validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+  <script>
+    $(document).on('click', '#con-sales', function () {
+      console.log('clicked')
+      var email = $('#email-from-blog').val()
+      if (validateEmail(email)) {
+        window.location.href="https://user.apis.paralleldots.com/signing-up"
+      }
+      else {
+        $(".incorrect-email").html('Please enter a valid email').css({ 'color': 'orange', 'font-size': '12px', 'margin': '1px' })
+      }
+
+    })
+
+    function validateEmail(t) {
+      var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+      return testEmail.test(t)
+    }
+  </script>
+{% include 'alternatefooter.html' %}
+
+</body>
+</html>

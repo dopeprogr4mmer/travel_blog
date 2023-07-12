@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="row bg-dark text-center text-lg-left" style="padding-top: 30px; padding-bottom: 30px; padding-right: 30px; padding-left: 30px;">
+    {% for image in images %}
+    	<div class="col-lg-3 col-md-4 col-6">
+    	    <!--<a href="{{MEDIA_URL}}/uploads/{{image}}" class="d-block mb-4 h-100">
+    	        <img class="img-fluid img-thumbnail" src="{{MEDIA_URL}}/uploads/{{image}}" alt="@travelrealindia image">
+    	    </a>-->
+
+    	    <div class="item">
+    	    	<a href="{{MEDIA_URL}}/uploads/{{image}}" data-fancybox="gallery" class="d-block mb-4 h-100"><img src="{{MEDIA_URL}}/uploads/{{image}}" alt="@travelrealindia image" class="img-fluid img-thumbnail">
+              <div class="overlay d-flex align-items-center justify-content-center"></div></a></div>
+    	</div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

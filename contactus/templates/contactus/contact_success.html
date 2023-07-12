@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block center %}
+  <div class="align-self-xl-center mx-auto" style="padding-left: 34%; padding-top: 15%; padding-bottom: 15%;">
+    <font size="+3"><strong>Thanks!</strong></font>
+    <br>
+    <p>We appreciate your feedback.<br />
+    Someone from the team will be in touch with you shortly.</p>
+    <a class="btn btn-primary" href="{% url 'myposts:index' %}">Homepage</a>
+    <!--<a class="btn btn-primary" href="">Try Again</a>-->
+  </div>
+{% endblock %}

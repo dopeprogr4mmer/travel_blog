@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+	<h1> This Are The Results For Your Search</h1>
+	{% for post in queryset %}
+	<p>
+		<a href = "{{ post.get_absolute_url }}"> {{ post.title }}</a>
+	</p>
+	{% endfor %}
+
+{% endblock %}
+
+{% block footer%}
+		{% include 'alternatefooter.html' %}
+{% endblock footer %}
+

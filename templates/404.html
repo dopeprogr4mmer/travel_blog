@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block center %}
+	<div class="align-self-xl-center mx-auto" style="padding-left: 34%; padding-top: 15%; padding-bottom: 15%;">
+		<font size="+3"><strong>Error 404!</strong></font>
+		<font size="+3"><strong>Page Not Found</strong></font>
+		<br>
+		<br>
+		<a class="btn btn-primary" href="{% url 'myposts:index' %}">Homepage</a>
+		<a class="btn btn-primary" href="">Try Again</a>
+	</div>
+{% endblock %}
+
